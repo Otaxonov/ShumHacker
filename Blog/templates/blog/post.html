@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<fieldset>
+    <legend>[ {{ post.title }} ][ {{ post.author }} ]</legend>
+    <p>Content: {{ post.content }}</p>
+    <p>Date Created: {{ post.date_created }}</p>
+    <p>Date Modified: {{ post.date_modified }}</p>
+</fieldset>
+
+{% endblock content %}

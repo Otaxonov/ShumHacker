@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+{% if posts %}
+{% for post in posts %}
+<fieldset>
+    <legend>[ <a href="{% url 'blog_user_post' post.author.pk post.pk %}">{{ post.title }}</a> ][ {{ post.author }} ]</legend>
+    <p>{{ post.content }}</p>
+</fieldset>
+{% endfor %}
+{% else %}
+<p>No Posts Yet!</p>
+{% endif %}
+
+{% endblock content %}
