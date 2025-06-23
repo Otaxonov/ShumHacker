@@ -1,13 +1,14 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-<h3>Edit Post</h3>
-<hr>
+<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 light:text-white">Edit Post</h2>
+<hr class="text-gray-300">
 <form action="{% url 'users_post_edit' post.pk %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
+    {{ form|crispy }}
+    <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Submit</button>
 </form>
 
 {% endblock content %}

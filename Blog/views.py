@@ -12,14 +12,6 @@ class HomeView(View):
     context = {'title': 'Django Blog App'}
 
     def get(self, request, *args, **kwargs):
-        return render(request=request, template_name=self.template_name, context=self.context)
-
-
-class PostsView(View):
-    template_name = 'blog/posts.html'
-    context = {'title': 'Posts View'}
-
-    def get(self, request, *args, **kwargs):
         self.context['posts'] = Post.objects.all()
         return render(request=request, template_name=self.template_name, context=self.context)
 
