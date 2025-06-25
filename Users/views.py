@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.template.defaultfilters import title
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -28,7 +29,13 @@ class MyPostsView(View):
         if query:
             posts = posts.filter(title__icontains=query)
 
+        paginator = Paginator(posts, 2)
+        cnt_posts = paginator.count
+        page_number = request.GET.get('page')
+        posts = paginator.get_page(page_number)
+
         self.context['posts'] = posts
+        self.context['cnt_posts'] = cnt_posts
         return render(request=request, template_name=self.template_name, context=self.context)
 
 
