@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.template.defaultfilters import title
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
@@ -20,7 +21,14 @@ class MyPostsView(View):
     context = {'title': 'My Posts View'}
 
     def get(self, request, *args, **kwargs):
-        self.context['posts'] = Post.objects.filter(author=request.user)
+        posts = Post.objects.filter(author=request.user)
+
+        query = request.GET.get('search', '')
+
+        if query:
+            posts = posts.filter(title__icontains=query)
+
+        self.context['posts'] = posts
         return render(request=request, template_name=self.template_name, context=self.context)
 
 
