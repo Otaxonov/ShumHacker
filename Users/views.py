@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.views.generic import RedirectView
+from django.contrib import messages
 from django.views import View
 from Users.forms import (
     RegisterForm, LoginForm,
@@ -54,6 +55,7 @@ class PostCreateView(View):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            messages.success(request, 'Post Created Successfully!')
             return redirect('users_my_posts')
         self.context['form'] = form
         return render(request=request, template_name=self.template_name, context=self.context)
@@ -72,6 +74,7 @@ class PostDeleteView(View):
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['post_pk'], author=request.user)
         post.delete()
+        messages.success(request, 'Post Deleted Successfully!')
         return redirect('users_my_posts')
 
 
@@ -97,6 +100,7 @@ class PostEditView(View):
 
         if form.is_valid():
             form.save()
+            messages.success(request, 'Post Updated Successfully!')
             return redirect('users_post_edit', kwargs['post_pk'])
 
         self.context['form'] = form

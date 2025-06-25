@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
 from pathlib import Path
 import environ
 
@@ -149,3 +149,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'Blog': ['Post'],  # If you still want to exclude Blog.Post
 #     },
 # }
+MESSAGE_TAGS = {
+    messages.INFO: "blue",
+    messages.SUCCESS: "green",
+    messages.ERROR: "red",
+    messages.WARNING: "yellow",
+}
