@@ -18,10 +18,10 @@ class LoginForm(AuthenticationForm):
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'poster', 'content']
 
 
 class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'poster', 'content']

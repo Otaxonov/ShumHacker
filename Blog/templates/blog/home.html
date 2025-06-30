@@ -2,9 +2,42 @@
 
 {% block content %}
 
-<fieldset>
-    <legend>Django Blog App</legend>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad consequatur dolorum ea ex excepturi explicabo fugit, hic illum iste molestiae nesciunt nihil optio quaerat quibusdam, quo quod quos sed, sint? Architecto aspernatur autem inventore neque, nihil nisi obcaecati odio optio perspiciatis quaerat quasi, qui, quisquam recusandae soluta tempore temporibus ut velit voluptas? Accusamus architecto assumenda consequuntur corporis doloremque ea esse et facere fugit harum illum itaque iusto molestiae mollitia non odio, omnis optio, quam quia quisquam quod rerum soluta unde. Deserunt necessitatibus repellat soluta velit voluptatibus. Distinctio enim in magni numquam optio porro rerum totam ut veniam. Ab consequuntur distinctio dolores eveniet in, ipsam laboriosam natus numquam optio quidem repellat unde veniam voluptatem. Alias amet aut exercitationem id inventore natus necessitatibus porro quas quis quod. Beatae consequatur eos ex ipsam laborum laudantium non, obcaecati omnis rem vero. Ab architecto assumenda aut autem blanditiis, consequuntur corporis cum dignissimos doloribus enim eum eveniet expedita facere fugiat fugit id illo incidunt libero magnam minima nihil nisi numquam odio officia omnis optio placeat porro, possimus quae quaerat qui quia recusandae repellat tenetur unde vero voluptatibus! Consequuntur culpa delectus deleniti doloremque eligendi praesentium quidem vitae! Amet dolores fuga, fugiat incidunt minus non quaerat sunt veniam?</p>
-</fieldset>
+{% if posts %}
+
+{% else %}
+<p>No Posts Yet!</p>
+{% endif %}
+
+
+<section class="bg-white light:bg-gray-900">
+  <div class="py-8 mx-auto max-w-screen-xl lg:py-16">
+      <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+          <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 light:text-white">Our Blog</h2>
+          <p class="font-light text-gray-500 sm:text-xl light:text-gray-400">We use an agile approach to test assumptions and connect with the needs of your audience early and often.</p>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+          {% for post in posts %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm light:bg-gray-800 light:border-gray-700">
+                    <a href="#">
+                        <img class="rounded-t-lg h-64 w-96 object-cover" src="{{ post.poster.url }}" alt="" />
+                    </a>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 light:text-white">{{ post.title }}</h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 light:text-gray-400">{{ post.content|truncatechars:80 }}</p>
+                        <a href="{{ post.get_absolute_url }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">
+                            Read more
+                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
 
 {% endblock content %}

@@ -21,7 +21,7 @@ class PostView(View):
     context = {}
 
     def get(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=kwargs['post_pk'])
+        post = Post.objects.get(slug=kwargs['post_slug'])
 
         self.context['post'] = post
         self.context['title'] = post.title

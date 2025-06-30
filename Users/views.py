@@ -50,7 +50,7 @@ class PostCreateView(View):
         return render(request=request, template_name=self.template_name, context=self.context)
 
     def post(self, request, *args, **kwargs):
-        form = PostCreateForm(request.POST)
+        form = PostCreateForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -96,7 +96,7 @@ class PostEditView(View):
 
         post = Post.objects.get(pk=kwargs['post_pk'], author=request.user)
 
-        form = PostEditForm(request.POST, instance=post)
+        form = PostEditForm(request.POST, request.FILES, instance=post)
 
         if form.is_valid():
             form.save()
