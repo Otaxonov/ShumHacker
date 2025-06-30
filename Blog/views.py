@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import render, redirect
 from django.views import View
 from Blog.models import (
     Post, User
@@ -12,7 +14,19 @@ class HomeView(View):
     context = {'title': 'Django Blog App'}
 
     def get(self, request, *args, **kwargs):
-        self.context['posts'] = Post.objects.all()
+        posts = Post.objects.all()
+
+        query = request.GET.get('search', '')
+
+        if query:
+            posts = posts.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query) |
+                Q(author__username__icontains=query)
+            )
+
+        self.context['posts'] = posts
         return render(request=request, template_name=self.template_name, context=self.context)
 
 
@@ -21,9 +35,14 @@ class PostView(View):
     context = {}
 
     def get(self, request, *args, **kwargs):
-        post = Post.objects.get(slug=kwargs['post_slug'])
+        try:
+            post = Post.objects.get(slug=kwargs['post_slug'])
+        except Post.DoesNotExist:
+            messages.error(request, 'No Such Post Exists')
+            return redirect('blog_home')
 
         self.context['post'] = post
+        self.context['post_tags'] = post.tags.all()
         self.context['title'] = post.title
         return render(request=request, template_name=self.template_name, context=self.context)
 

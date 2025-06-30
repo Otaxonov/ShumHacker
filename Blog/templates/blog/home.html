@@ -2,19 +2,23 @@
 
 {% block content %}
 
+        <form class="max-w-md">
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only light:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 light:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" name="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="Search..."/>
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Search</button>
+            </div>
+        </form>
+
 {% if posts %}
-
-{% else %}
-<p>No Posts Yet!</p>
-{% endif %}
-
 
 <section class="bg-white light:bg-gray-900">
   <div class="py-8 mx-auto max-w-screen-xl lg:py-16">
-      <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-          <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 light:text-white">Our Blog</h2>
-          <p class="font-light text-gray-500 sm:text-xl light:text-gray-400">We use an agile approach to test assumptions and connect with the needs of your audience early and often.</p>
-      </div>
       <div class="grid gap-4 lg:grid-cols-3">
           {% for post in posts %}
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm light:bg-gray-800 light:border-gray-700">
@@ -39,5 +43,23 @@
   </div>
 </section>
 
+{% else %}
+<p>No Posts Yet!</p>
+{% endif %}
+
+<div class="city">
+<h2>London</h2>
+<p>London is the capital of England.</p>
+</div>
+
+<div class="city">
+<h2>Paris</h2>
+<p>Paris is the capital of France.</p>
+</div>
+
+<div class="city">
+<h2>Tokyo</h2>
+<p>Tokyo is the capital of Japan.</p>
+</div>
 
 {% endblock content %}

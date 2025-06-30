@@ -7,6 +7,13 @@
     <p>Content: {{ post.content }}</p>
     <p>Date Created: {{ post.date_created }}</p>
     <p>Date Modified: {{ post.date_modified }}</p>
+    {% if post_tags %}
+    <p>
+        {% for post_tag in post_tags %}
+            #{{ post_tag.name }}
+        {% endfor %}
+    </p>
+    {% endif %}
 </fieldset>
 
 {% endblock content %}

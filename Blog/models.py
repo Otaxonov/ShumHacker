@@ -6,11 +6,19 @@ from django.urls import reverse
 
 User = get_user_model()
 
+class Tag(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=256, unique=True, null=True)
     content = models.TextField()
     poster = models.ImageField(upload_to='blog/post/uploads', default='blog/post/default.png', null=True, blank=True)
+    tags = models.ManyToManyField(Tag)
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -25,3 +33,4 @@ class Post(models.Model):
         ordering = ['-date_created']
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
