@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from ckeditor.widgets import CKEditorWidget
 from Blog.models import User, Post
 from django import forms
 
@@ -20,8 +21,12 @@ class PostCreateForm(forms.ModelForm):
         model = Post
         fields = ['title', 'poster', 'content']
 
+    content = forms.CharField(widget=CKEditorWidget())
+
 
 class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'poster', 'content']
+
+    content = forms.CharField(widget=CKEditorWidget())

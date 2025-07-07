@@ -7,6 +7,7 @@
 <hr class="text-gray-300">
 <form action="{% url 'users_post_create' %}" enctype="multipart/form-data" method="post">
     {% csrf_token %}
+    {{ form.media }}
     {{ form|crispy }}
     <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Submit</button>
 </form>

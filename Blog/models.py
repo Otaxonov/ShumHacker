@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from Blog.validators import title_starts_with_a
 from django.db import models
 from django.urls import reverse
 
@@ -14,7 +15,7 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100, unique=True, validators=[title_starts_with_a])
     slug = models.SlugField(max_length=256, unique=True, null=True)
     content = models.TextField()
     poster = models.ImageField(upload_to='blog/post/uploads', default='blog/post/default.png', null=True, blank=True)
