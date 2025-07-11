@@ -26,6 +26,17 @@
     {% block content %}{% endblock content %}
 </div>
 
+{% load post_tags %}
+{% get_posts as custom_posts %}
+
+{% for custom_post in custom_posts %}
+    <p>{{ custom_post.title }}</p>
+{% endfor %}
+
+<hr>
+
+{% show_posts %}
+
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
 </body>
