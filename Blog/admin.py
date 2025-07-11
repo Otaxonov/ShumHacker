@@ -16,6 +16,9 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     actions = ['set_default_author']
     # ordering = ['']
+    # exclude = ['author']
+    # fields = ['title', 'slug']
+    readonly_fields = ['author']
 
     @admin.display(description='title chars count')
     def extra_info(self, post: Post):
