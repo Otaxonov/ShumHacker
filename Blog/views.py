@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from Users.decorators import check_post
 from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -30,16 +32,13 @@ class HomeView(View):
         return render(request=request, template_name=self.template_name, context=self.context)
 
 
+@method_decorator(check_post, name="dispatch")
 class PostView(View):
     template_name = 'blog/post.html'
     context = {}
 
     def get(self, request, *args, **kwargs):
-        try:
-            post = Post.objects.get(slug=kwargs['post_slug'])
-        except Post.DoesNotExist:
-            messages.error(request, 'No Such Post Exists')
-            return redirect('blog_home')
+        post = kwargs['post']
 
         self.context['post'] = post
         self.context['post_tags'] = post.tags.all()
