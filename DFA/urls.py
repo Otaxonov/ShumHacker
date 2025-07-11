@@ -27,3 +27,6 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     # path('schema-viewer/', include('schema_viewer.urls')),
 ]
+
+admin.site.site_header = 'Admin Panel'
+admin.site.site_title = 'Blog Admin'
